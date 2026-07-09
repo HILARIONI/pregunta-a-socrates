@@ -28,7 +28,7 @@ export default async function handler(req, res) {
 
   try {
     const geminiResponse = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-flash-latest:generateContent?key=${apiKey}`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -43,7 +43,7 @@ export default async function handler(req, res) {
 
     const reply =
       data?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() ||
-      '...';
+      JSON.stringify(data);
 
     res.status(200).json({ reply });
   } catch (err) {
